@@ -17,12 +17,12 @@ const Item = styled('div')({
   display: 'flex',
 })
 
-function Task(props) {
+function Task({ event, index }) {
   const isDragDisabled = false; // props.task.id === 'task-1';
   return (
     <Draggable
-      draggableId={props.task.id}
-      index={props.index}
+      draggableId={event.id}
+      index={index}
       // isDragDisabled={isDragDisabled}
     >
       {(provided, snapshot) => (
@@ -34,11 +34,11 @@ function Task(props) {
           // isDragDisabled={isDragDisabled}
         >
           <Info
-            title={props.task.title}
-            description={props.task.content}
-            location={props.task.location}
-            link={props.task.link}
-            time={props.task.length}
+            title={event.title}
+            description={event.content}
+            location={event.location}
+            link={event.link}
+            time={event.length}
             isDragging={snapshot.isDragging}
           />
         </Item>

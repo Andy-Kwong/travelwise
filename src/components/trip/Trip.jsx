@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { styled } from '@material-ui/core/styles';
 import { DragDropContext, Droppable } from "react-beautiful-dnd";
-import initialData from './travelData';
+import initialData from './newTravelData';
 import Column from "./Column";
 
 const Container = styled('div')({
@@ -9,9 +9,8 @@ const Container = styled('div')({
 })
 
 const InnerList = React.memo((props) => {
-  const { column, taskMap, index } = props;
-  const tasks = column.taskIds.map(taskId => taskMap[taskId]);
-  return <Column column={column} tasks={tasks} index={index} />;
+  const { column, index } = props;
+  return <Column column={column} index={index} />;
 });
 
 function ExampleBoard() {
@@ -43,6 +42,9 @@ function ExampleBoard() {
     setHomeIndex(null);
     const { destination, source, draggableId, type } = result;
 
+    console.log('result:', result);
+    console.log('draggableId:', draggableId);
+
     if (!destination) {
       return;
     }
@@ -56,8 +58,9 @@ function ExampleBoard() {
 
     if (type === 'column') {
       const newColumnOrder = Array.from(data.columnOrder);
+      const event = data.columns[source.droppableId].events[source.index];
       newColumnOrder.splice(source.index, 1);
-      newColumnOrder.splice(destination.index, 0, draggableId);
+      newColumnOrder.splice(destination.index, 0, event);
 
       const newState = {
         ...data,
@@ -67,17 +70,19 @@ function ExampleBoard() {
       return;
     }
 
+    // Start and end columns
     const start = data.columns[source.droppableId];
     const finish = data.columns[destination.droppableId];
 
     if (start === finish) {
-      const newTaskIds = Array.from(start.taskIds);
-      newTaskIds.splice(source.index, 1);
-      newTaskIds.splice(destination.index, 0, draggableId);
+      const newEvents = Array.from(start.events);
+      const event = data.columns[source.droppableId].events[source.index];
+      newEvents.splice(source.index, 1);
+      newEvents.splice(destination.index, 0, event);
 
       const newColumn = {
         ...start,
-        taskIds: newTaskIds,
+        events: newEvents,
       };
 
       const newState = {
@@ -94,18 +99,19 @@ function ExampleBoard() {
     }
 
     // Moving from one list to another
-    const startTaskIds = Array.from(start.taskIds);
-    startTaskIds.splice(source.index, 1);
+    const startEvents = Array.from(start.events);
+    const event = data.columns[source.droppableId].events[source.index];
+    startEvents.splice(source.index, 1);
     const newStart = {
       ...start,
-      taskIds: startTaskIds,
+      events: startEvents,
     };
 
-    const finishTaskIds = Array.from(finish.taskIds);
-    finishTaskIds.splice(destination.index, 0, draggableId);
+    const finishEvents = Array.from(finish.events);
+    finishEvents.splice(destination.index, 0, event);
     const newFinish = {
       ...finish,
-      taskIds: finishTaskIds,
+      events: finishEvents,
     };
 
     const newState = {
@@ -148,7 +154,6 @@ function ExampleBoard() {
                 <InnerList
                   key={column.id}
                   column={column}
-                  taskMap={data.pois}
                   // isDropDisabled={isDropDisabled}
                   index={index}
                 />
@@ -160,6 +165,6 @@ function ExampleBoard() {
       </Droppable>
     </DragDropContext>
   )
-};
+}
 
 export default ExampleBoard;

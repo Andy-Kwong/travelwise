@@ -6,21 +6,22 @@ const eventSchema = mongoose.Schema({
   content: String,
   link: String,
   location: String,
+  address: String,
   time: Number,
   notes: String
 });
 
-const EventModel = mongoose.model('Event', eventSchema);
+const Event = mongoose.model('Event', eventSchema);
 
-const findAll = async () => EventModel.find({});
+const findAll = async () => Event.find({});
 
 const findOne = async (req, res) => {
   const id = req.body.id
-  const data = await EventModel.findOne({id});
+  const data = await Event.findOne({id});
   res.send(data);
 }
 
-const insert = async (events) => EventModel.create(events);
+const insert = async (events) => Event.create(events);
 
 module.exports = {
   findAll,

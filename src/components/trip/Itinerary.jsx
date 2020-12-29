@@ -26,25 +26,25 @@ const TaskList = styled('div')({
 });
 
 const InnerList = React.memo((props) => {
-  return props.tasks.map((task, index) => (
-        <Task key={task.id} task={task} index={index} />
+  return props.events.map((event, index) => (
+        <Task key={event.id} event={event} index={index} />
       ));
 });
 
-function Column(props) {
+function Column({ column, index }) {
   return (
     <Draggable
-      draggableId={props.column.id}
-      index={props.index}
+      draggableId={column.id}
+      index={index}
     >
       {(provided) => (
         <Container
           {...provided.draggableProps}
           ref={provided.innerRef}
         >
-          <Title {...provided.dragHandleProps}>{props.column.title}</Title>
+          <Title {...provided.dragHandleProps}>{column.title}</Title>
           <Droppable
-            droppableId={props.column.id}
+            droppableId={column.id}
             // type={props.column.id === 'column-3' ? 'done' : 'active'}
             // isDropDisabled={props.isDropDisabled}
             type="task"
@@ -55,7 +55,7 @@ function Column(props) {
                 {...provided.droppableProps}
                 isDraggingOver={snapshot.isDraggingOver}
               >
-                <InnerList tasks={props.tasks} />
+                <InnerList events={column.events} />
                 {provided.placeholder}
               </TaskList>
             )}
