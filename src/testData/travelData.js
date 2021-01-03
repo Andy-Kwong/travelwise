@@ -102,7 +102,7 @@ data = {
   columns: {
     'my-itinerary': {
       id: 'my-itinerary',
-      title: 'Chicago Itinerary 2021',
+      title: 'Chicago Trip 2021',
       taskIds: [],
     },
     'itinerary-1': {
