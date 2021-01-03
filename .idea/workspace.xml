@@ -5,32 +5,34 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="969e6f4d-a71e-4ae0-81b4-80819cddae6d" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.env" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/db/event.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/db/itinerary.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/db/trip.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/server.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/itinerary/Column.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/itinerary/ExampleBoard.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/itinerary/Info.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/itinerary/MainBoard.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/itinerary/Task.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/itinerary/data.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/itinerary/example-hooks.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/itinerary/example-onDragEnd-result.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/itinerary/example-snapshot.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/itinerary/travelData.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/landing/Hero.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/landing/Landing.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/landing/Navbar.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/login/Login.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/login/Registration.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/db/testData.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/user/Profile.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/user/ProfileTab.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/user/SettingsTab.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/user/Sidebar.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/user/TripCard.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/user/TripTab.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/context/ProfileContext.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/context/TripContext.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/context/api.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/context/dataWrangler.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.eslintcache" beforeDir="false" afterPath="$PROJECT_DIR$/.eslintcache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db/event.js" beforeDir="false" afterPath="$PROJECT_DIR$/db/event.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db/seed.js" beforeDir="false" afterPath="$PROJECT_DIR$/db/seed.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db/trip.js" beforeDir="false" afterPath="$PROJECT_DIR$/db/trip.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/server.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/server.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/trip/Event.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/trip/Event.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/trip/Info.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/trip/Info.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/trip/Itinerary.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/trip/Itinerary.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/trip/Trip.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/trip/Trip.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/testData/newTravelData.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/testData/newTravelData.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/testData/travelData.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/testData/travelData.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/testData/travelDataArchive.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/testData/travelDataArchive.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -74,12 +76,24 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/context" />
+      <recent name="$PROJECT_DIR$/src/testData" />
       <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/src/components" />
     </key>
   </component>
-  <component name="RunManager" selected="npm.server">
+  <component name="RunManager" selected="npm.build">
     <configuration name="Debug Application" type="JavascriptDebugType" uri="http://localhost:3000">
+      <method v="2" />
+    </configuration>
+    <configuration name="build" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="build" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
       <method v="2" />
     </configuration>
     <configuration name="npm start" type="js.build_tools.npm">
@@ -104,6 +118,7 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="npm.build" />
         <item itemvalue="npm.server" />
       </list>
     </recent_temporary>
@@ -117,8 +132,65 @@
       <option name="presentableId" value="Default" />
       <updated>1608580353713</updated>
       <workItem from="1608580354981" duration="29284000" />
-      <workItem from="1609101863397" duration="21063000" />
+      <workItem from="1609101863397" duration="71921000" />
     </task>
+    <task id="LOCAL-00001" summary="Create landing, login, and registration pages">
+      <created>1609205885073</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1609205885074</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Create board with events">
+      <created>1609205943217</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1609205943217</updated>
+    </task>
+    <task id="LOCAL-00003" summary="add test travel data">
+      <created>1609205979269</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1609205979269</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Create express server">
+      <created>1609206015247</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1609206015247</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Create schemas and models">
+      <created>1609206079522</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1609206079522</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Delete unreferenced files">
+      <created>1609206134395</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1609206134395</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Split description from task into info">
+      <created>1609206198562</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1609206198562</updated>
+    </task>
+    <task id="LOCAL-00008" summary="create placeholder files">
+      <created>1609206239922</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1609206239922</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -135,5 +207,16 @@
       </map>
     </option>
     <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Create landing, login, and registration pages" />
+    <MESSAGE value="Create board with events" />
+    <MESSAGE value="add test travel data" />
+    <MESSAGE value="Create express server" />
+    <MESSAGE value="Create schemas and models" />
+    <MESSAGE value="Delete unreferenced files" />
+    <MESSAGE value="Split description from task into info" />
+    <MESSAGE value="create placeholder files" />
+    <option name="LAST_COMMIT_MESSAGE" value="create placeholder files" />
   </component>
 </project>

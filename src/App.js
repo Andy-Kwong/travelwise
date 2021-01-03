@@ -1,12 +1,18 @@
 import React from 'react';
-// import Login from './components/login/Login';
-// import MainBoard from "./components/itinerary/MainBoard";
-import ExampleBoard from "./components/itinerary/ExampleBoard";
+import Login from './components/login/Login';
+import Trip from "./components/trip/Trip";
+import Profile from "./components/user/Profile";
+import { TripContextProvider } from "./context/TripContext";
 
 function App() {
   return (
     <div>
-      <ExampleBoard />
+      {/*<TripContextProvider>*/}
+      {/*  <Trip />*/}
+      {/*</TripContextProvider>*/}
+      <TripContextProvider>
+        <Profile />
+      </TripContextProvider>
     </div>
   );
 }
