@@ -4,11 +4,14 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { TripContextProvider } from "./context/TripContext";
 
 ReactDOM.render(
   <React.StrictMode>
     <CssBaseline />
-    <App />
+    <TripContextProvider>
+      <App />
+    </TripContextProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );
