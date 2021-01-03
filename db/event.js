@@ -7,7 +7,7 @@ const eventSchema = mongoose.Schema({
   link: String,
   location: String,
   address: String,
-  time: Number,
+  duration: Number,
   notes: String
 });
 
