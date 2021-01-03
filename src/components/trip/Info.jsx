@@ -59,19 +59,25 @@ const Time = styled('span')({
 function Info(props) {
   return (
     <Container>
-      {props.link
+      {
+        props.link
         ? <Title href={props.link} target="_blank">
             <TitleText>{props.title}</TitleText>
             <OpenInNewIcon style={{fontSize: 12, marginLeft: '0.25em'}} />
           </Title>
         : <Title>
             <TitleText>{props.title}</TitleText>
-          </Title>}
+          </Title>
+      }
       <Description isDragging={props.isDragging}>{props.description}</Description>
       <Location>Location: {props.location}</Location>
-      <Time>Recommended time: {props.time} hours</Time>
+      {
+        props.duration < 1
+        ? <Time>Duration: {60 * props.duration} minutes</Time>
+        : <Time>Duration: {props.duration} {props.duration === 1 ? 'hour' : 'hours'}</Time>
+      }
     </Container>
   );
-}
+};
 
 export default Info;

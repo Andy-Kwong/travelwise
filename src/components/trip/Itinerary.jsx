@@ -1,7 +1,7 @@
 import React from 'react';
 import { styled } from '@material-ui/core/styles';
 import { Droppable, Draggable } from "react-beautiful-dnd";
-import Task from "./Task";
+import Event from "./Event";
 
 const Container = styled('div')({
   margin: '8px',
@@ -11,6 +11,8 @@ const Container = styled('div')({
   width: '360px',
   display: 'flex',
   flexDirection: 'column',
+  height: '98vh',
+  boxSizing: 'border-box',
 });
 
 const Title =  styled('h3')({
@@ -23,18 +25,24 @@ const TaskList = styled('div')({
   backgroundColor: props => (props.isDraggingOver ? 'skyblue' : 'inherit'),
   flexGrow: '1',
   minHeight: '100px',
+  height: '100%',
+  overflow: 'scroll',
+  boxSizing: 'border-box',
+  '&::-webkit-scrollbar': {
+    display: 'none',
+  }
 });
 
 const InnerList = React.memo((props) => {
   return props.events.map((event, index) => (
-        <Task key={event.id} event={event} index={index} />
+        <Event key={event._id} event={event} index={index} />
       ));
 });
 
-function Column({ column, index }) {
+function Itinerary({ itinerary, index }) {
   return (
     <Draggable
-      draggableId={column.id}
+      draggableId={itinerary._id}
       index={index}
     >
       {(provided) => (
@@ -42,10 +50,10 @@ function Column({ column, index }) {
           {...provided.draggableProps}
           ref={provided.innerRef}
         >
-          <Title {...provided.dragHandleProps}>{column.title}</Title>
+          <Title {...provided.dragHandleProps}>{itinerary.title}</Title>
           <Droppable
-            droppableId={column.id}
-            // type={props.column.id === 'column-3' ? 'done' : 'active'}
+            droppableId={itinerary._id}
+            // type={props.itinerary._id === 'itinerary-3' ? 'done' : 'active'}
             // isDropDisabled={props.isDropDisabled}
             type="task"
           >
@@ -55,7 +63,7 @@ function Column({ column, index }) {
                 {...provided.droppableProps}
                 isDraggingOver={snapshot.isDraggingOver}
               >
-                <InnerList events={column.events} />
+                <InnerList events={itinerary.events} />
                 {provided.placeholder}
               </TaskList>
             )}
@@ -66,4 +74,4 @@ function Column({ column, index }) {
   )
 }
 
-export default Column;
+export default Itinerary;

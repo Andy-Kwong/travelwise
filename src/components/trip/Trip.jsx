@@ -1,20 +1,23 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { styled } from '@material-ui/core/styles';
 import { DragDropContext, Droppable } from "react-beautiful-dnd";
-import initialData from './newTravelData';
-import Column from "./Column";
+import Itinerary from "./Itinerary";
+import TripContext from "../../context/TripContext";
+import { updateTrip } from "../../context/api";
 
 const Container = styled('div')({
   display: 'flex',
+  height: '100vh',
+  boxSizing: 'border-box',
 })
 
 const InnerList = React.memo((props) => {
-  const { column, index } = props;
-  return <Column column={column} index={index} />;
+  const { itinerary, index, key } = props;
+  return <Itinerary key={key} itinerary={itinerary} index={index} />;
 });
 
-function ExampleBoard() {
-  const [data, setData] = useState(initialData);
+function Trip() {
+  const { tripData, setTripData } = useContext(TripContext);
   const [homeIndex, setHomeIndex] = useState(null);
 
   // const onDragStart = () => {
@@ -31,7 +34,7 @@ function ExampleBoard() {
   // };
 
   const onDragStart = start => {
-    const homeIndex = data.columnOrder.indexOf(start.source.droppableId);
+    const homeIndex = tripData.order.indexOf(start.source.droppableId);
 
     setHomeIndex(homeIndex)
   }
@@ -57,50 +60,52 @@ function ExampleBoard() {
     }
 
     if (type === 'column') {
-      const newColumnOrder = Array.from(data.columnOrder);
-      const event = data.columns[source.droppableId].events[source.index];
-      newColumnOrder.splice(source.index, 1);
-      newColumnOrder.splice(destination.index, 0, event);
+      const newItineraryOrder = Array.from(tripData.order);
+      newItineraryOrder.splice(source.index, 1);
+      newItineraryOrder.splice(destination.index, 0, result.draggableId);
 
       const newState = {
-        ...data,
-        columnOrder: newColumnOrder,
+        ...tripData,
+        order: newItineraryOrder,
       };
-      setData(newState);
+      setTripData(newState);
+      updateTrip(newState._id, newState);
       return;
     }
 
     // Start and end columns
-    const start = data.columns[source.droppableId];
-    const finish = data.columns[destination.droppableId];
+    const start = tripData.itineraries[source.droppableId];
+    const finish = tripData.itineraries[destination.droppableId];
 
+    // Move within same list
     if (start === finish) {
       const newEvents = Array.from(start.events);
-      const event = data.columns[source.droppableId].events[source.index];
+      const event = tripData.itineraries[source.droppableId].events[source.index];
       newEvents.splice(source.index, 1);
       newEvents.splice(destination.index, 0, event);
 
-      const newColumn = {
+      const newItinerary = {
         ...start,
         events: newEvents,
       };
 
       const newState = {
-        ...data,
-        columns: {
-          ...data.columns,
-          [newColumn.id]: newColumn,
+        ...tripData,
+        itineraries: {
+          ...tripData.itineraries,
+          [newItinerary._id]: newItinerary,
         }
       }
 
-      setData(newState);
+      setTripData(newState);
       // TODO: update DB with new list here
+      updateTrip(newState._id, newState);
       return;
     }
 
     // Moving from one list to another
     const startEvents = Array.from(start.events);
-    const event = data.columns[source.droppableId].events[source.index];
+    const event = tripData.itineraries[source.droppableId].events[source.index];
     startEvents.splice(source.index, 1);
     const newStart = {
       ...start,
@@ -115,56 +120,58 @@ function ExampleBoard() {
     };
 
     const newState = {
-      ...data,
-      columns: {
-        ...data.columns,
-        [newStart.id]: newStart,
-        [newFinish.id]: newFinish,
+      ...tripData,
+      itineraries: {
+        ...tripData.itineraries,
+        [newStart._id]: newStart,
+        [newFinish._id]: newFinish,
       },
     };
 
-    setData(newState);
+    setTripData(newState);
     // TODO: update DB with new list here
+    updateTrip(newState._id, newState);
   }
 
   return (
-    <DragDropContext
-      // onDragStart={onDragStart}
-      // onDragUpdate={onDragUpdate}
-      onDragStart={onDragStart}
-      onDragEnd={onDragEnd}
-    >
-      <Droppable
-        droppableId="all-columns"
-        direction="horizontal"
-        type="column"
+    tripData !== null
+      && (<DragDropContext
+        // onDragStart={onDragStart}
+        // onDragUpdate={onDragUpdate}
+        onDragStart={onDragStart}
+        onDragEnd={onDragEnd}
       >
-        {provided => (
-          <Container
-            {...provided.droppableProps}
-            ref={provided.innerRef}
-          >
-            {data.columnOrder.map((columnId, index) => {
-              const column = data.columns[columnId];
-              //const tasks = column.taskIds.map(taskId => data.tasks[taskId]);
+        <Droppable
+          droppableId="all-columns"
+          direction="horizontal"
+          type="column"
+        >
+          {provided => (
+            <Container
+              {...provided.droppableProps}
+              ref={provided.innerRef}
+            >
+              {tripData.order.map((title, index) => {
+                const itinerary = tripData.itineraries[title];
+                // const tasks = column.taskIds.map(taskId => data.tasks[taskId]);
 
-              // const isDropDisabled = index < homeIndex;
+                // const isDropDisabled = index < homeIndex;
 
-              return (
-                <InnerList
-                  key={column.id}
-                  column={column}
-                  // isDropDisabled={isDropDisabled}
-                  index={index}
-                />
-              )
-            })}
-            {provided.placeholder}
-          </Container>
-        )}
-      </Droppable>
-    </DragDropContext>
+                return (
+                  <InnerList
+                    key={itinerary._id}
+                    itinerary={itinerary}
+                    // isDropDisabled={isDropDisabled}
+                    index={index}
+                  />
+                )
+              })}
+              {provided.placeholder}
+            </Container>
+          )}
+        </Droppable>
+      </DragDropContext>)
   )
 }
 
-export default ExampleBoard;
+export default Trip;
