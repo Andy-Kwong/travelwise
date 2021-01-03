@@ -23,6 +23,9 @@ export const updateTrip = async (tripId, updatedData) => {
 export const getTripsByUser = async (user) => {
   try {
     const trips = await axios.get(`/api/user/${user}/trips`);
+    for (let i = 0; i < trips.data.length; i++) {
+      tripWranglerInbound(trips.data[i]);
+    }
     return trips;
   } catch (err) {
     console.log(err);

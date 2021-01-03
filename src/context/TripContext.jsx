@@ -1,31 +1,35 @@
 import React, { createContext, useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { getTripById } from "./api";
-import { tripWranglerInbound } from './dataWrangler';
-import axios from 'axios';
+import {getTripById, getTripsByUser} from "./api";
 
 const TripContext = createContext();
 
 export const TripContextProvider = ({ children }) => {
   const [tripData, setTripData] = useState(null);
+  const [userTrips, setUserTrips] = useState(null);
   const [menuSelection, setMenuSelection] = useState('Profile')
 
   useEffect(() => {
     const getTrip = async () => {
       const tripId = '5fece0c5eb8dba4e6e02d697'
-      const newTripData = getTripById(tripId);
+      const newTripData = await getTripById(tripId);
       setTripData(newTripData);
+
+      const owner = 'Andy Kwong';
+      const tripsByUser = await getTripsByUser(owner);
+      setUserTrips(tripsByUser.data);
+      //console.log('tripsByUser', tripsByUser);
     }
     getTrip();
   }, [])
-
-
 
   return (
     <TripContext.Provider
       value={{
         tripData,
         setTripData,
+        userTrips,
+        setUserTrips,
         menuSelection,
         setMenuSelection,
       }}

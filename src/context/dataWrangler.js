@@ -6,7 +6,6 @@ export const tripWranglerInbound = (data) => {
     itObject[it[i]._id] = it[i];
   }
   data.itineraries = itObject;
-  console.log(data);
   return data;
 }
 
@@ -15,6 +14,5 @@ export const tripWranglerOutbound = (updatedData) => {
   const it = Object.values(updatedData.itineraries);
   const outboundData = { ...updatedData };
   outboundData.itineraries = it;
-  console.log(outboundData);
   return outboundData;
 }
