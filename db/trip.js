@@ -8,6 +8,7 @@ const tripSchema = mongoose.Schema({
   itineraries: [itinerary.itinerarySchema],
   notes: String,
   dates: String,
+  photoUrl: String,
   order: [{
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Itinerary'

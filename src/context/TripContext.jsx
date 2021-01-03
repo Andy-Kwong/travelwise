@@ -11,7 +11,7 @@ export const TripContextProvider = ({ children }) => {
 
   useEffect(() => {
     const getTrip = async () => {
-      const tripId = '5fece0c5eb8dba4e6e02d697'
+      const tripId = '5ff2463d6badc20eaabe76bb'
       const newTripData = await getTripById(tripId);
       setTripData(newTripData);
 

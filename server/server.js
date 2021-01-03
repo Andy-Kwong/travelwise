@@ -2,6 +2,7 @@ const express = require('express');
 const path = require('path');
 const debug = require('debug')('app:server:server')
 const trip = require('../db/trip');
+const create = require('../db/create.js');
 
 function createServer() {
   const app = express();
@@ -15,10 +16,8 @@ function createServer() {
   })
   app.get('/api/trip/:tripId', trip.findOne);
   app.put('/api/trip/:tripId', trip.updateTrip);
-  app.get('/api/user/:user/trips', trip.findAllByUser)
-  app.get('/hello', (req, res) => {
-    res.send({ express: 'hello' });
-  })
+  app.get('/api/user/:user/trips', trip.findAllByUser);
+  app.post('/api/event', create.createEvent);
   app.get('*', (req, res) => {
     debug(`getting id: ${req.params}`);
     res.sendFile(path.join(__dirname, '..', 'build', 'index.html'));

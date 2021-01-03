@@ -8,12 +8,19 @@ import { updateTrip } from "../../context/api";
 const Container = styled('div')({
   display: 'flex',
   height: '100vh',
+  width: '100vw',
+  overflow: 'scroll',
   boxSizing: 'border-box',
 })
 
 const InnerList = React.memo((props) => {
-  const { itinerary, index, key } = props;
-  return <Itinerary key={key} itinerary={itinerary} index={index} />;
+  const { itinerary, index, key, handleClickTitle } = props;
+  return <Itinerary
+    key={key}
+    itinerary={itinerary}
+    index={index}
+    handleClickTitle={handleClickTitle}
+  />;
 });
 
 function Trip() {
@@ -98,7 +105,6 @@ function Trip() {
       }
 
       setTripData(newState);
-      // TODO: update DB with new list here
       updateTrip(newState._id, newState);
       return;
     }
@@ -129,9 +135,28 @@ function Trip() {
     };
 
     setTripData(newState);
-    // TODO: update DB with new list here
     updateTrip(newState._id, newState);
   }
+
+  const handleClickTitle = (itineraryId, newTitle) => {
+    const updatedItinerary = {
+      ...tripData.itineraries[itineraryId],
+      title: newTitle,
+    }
+    const newState = {
+      ...tripData,
+      itineraries: {
+        ...tripData.itineraries,
+        [itineraryId]: updatedItinerary,
+      }
+    }
+    console.log('newState:', newState);
+    console.log('updatedItinerary:', updatedItinerary);
+    setTripData(newState);
+    updateTrip(newState._id, newState);
+  };
+
+  const addItinerary = () => {};
 
   return (
     tripData !== null
@@ -163,10 +188,12 @@ function Trip() {
                     itinerary={itinerary}
                     // isDropDisabled={isDropDisabled}
                     index={index}
+                    handleClickTitle={handleClickTitle}
                   />
                 )
               })}
               {provided.placeholder}
+              <button onClick={addItinerary}>Add Itinerary</button>
             </Container>
           )}
         </Droppable>

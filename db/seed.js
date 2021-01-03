@@ -34,6 +34,7 @@ const seedEvents = async () => {
       itineraries: allItineraries,
       notes: 'Plan for a one week trip to Chicago over Christmas 2021',
       dates: '12/23/2021 - 12/30/2021',
+      photoUrl: 'https://images.unsplash.com/photo-1609433635932-6571b56f4fd4?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80',
       order: itineraryIds
     })
     debug(tripRes);
