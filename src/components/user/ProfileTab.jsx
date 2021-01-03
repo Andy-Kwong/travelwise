@@ -1,7 +1,5 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { styled } from '@material-ui/core/styles';
-import TripContext from "../../context/TripContext";
-import TripCard from "./TripCard";
 
 const Container = styled('div')({
   display: 'flex',
@@ -17,12 +15,9 @@ const Container = styled('div')({
 })
 
 function ProfileTab(props) {
-  const { tripData, menuSelection } = useContext(TripContext);
-  console.log(tripData);
-
   return (
     <Container>
-      <TripCard />
+      <h1>Good Afternoon, Mr. Poopy B.</h1>
     </Container>
   );
 }

@@ -22,7 +22,7 @@ function SettingsTab(props) {
 
   return (
     <Container>
-      <TripCard />
+      Settings tab
     </Container>
   );
 }

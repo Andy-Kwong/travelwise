@@ -1,7 +1,9 @@
 import React, { useContext } from 'react';
+import { useHistory } from 'react-router-dom';
 import { styled } from '@material-ui/core/styles';
 import TripContext from "../../context/TripContext";
 import TripCard from "./TripCard";
+import { getTripById } from "../../context/api";
 
 const Container = styled('div')({
   display: 'flex',
@@ -17,12 +19,36 @@ const Container = styled('div')({
 })
 
 function TripTab(props) {
-  const { tripData, menuSelection } = useContext(TripContext);
-  console.log(tripData);
+  const { userTrips, setTripData } = useContext(TripContext);
+  const history = useHistory();
+  console.log('userTrips:', userTrips);
+  const handleClick = async (tripId) => {
+    // Call api to get trip by ID
+    const data = await getTripById(tripId);
+    console.log(data);
+    // update trip data
+    setTripData(data);
+    // route to /trip
+    history.push('/trip');
+  }
 
   return (
     <Container>
-      <TripCard />
+      <h2>Upcoming Trips</h2>
+      {
+        userTrips.map(trip => (
+          <TripCard
+            id={trip._id}
+            title={trip.title}
+            owner={trip.owner}
+            notes={trip.notes}
+            dates={trip.dates}
+            photoUrl={trip.photoUrl}
+            key={trip._id}
+            handleClick={handleClick}
+          />
+        ))
+      }
     </Container>
   );
 }
