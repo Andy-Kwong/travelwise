@@ -2,6 +2,7 @@ import React from 'react';
 import { styled } from '@material-ui/core/styles';
 import { Draggable } from "react-beautiful-dnd";
 import Info from "./Info";
+import {IconButton} from "@material-ui/core";
 
 const Item = styled('div')({
   width: '100%',
@@ -17,8 +18,14 @@ const Item = styled('div')({
   display: 'flex',
 })
 
-function Event({ event, index }) {
+
+function Event({ event, index, updateEvent, itineraryId }) {
   const isDragDisabled = false; // props.task.id === 'task-1';
+
+  const handleEdit = (data) => {
+    updateEvent(itineraryId, data);
+  };
+
   return (
     <Draggable
       draggableId={event._id}
@@ -34,12 +41,9 @@ function Event({ event, index }) {
           // isDragDisabled={isDragDisabled}
         >
           <Info
-            title={event.title}
-            description={event.content}
-            location={event.location}
-            link={event.link}
-            duration={event.duration}
+            event={event}
             isDragging={snapshot.isDragging}
+            handleEdit={handleEdit}
           />
         </Item>
       )}

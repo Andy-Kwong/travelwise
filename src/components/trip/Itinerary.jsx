@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { styled } from '@material-ui/core/styles';
 import EditIcon from '@material-ui/icons/Edit';
 import DoneIcon from '@material-ui/icons/Done';
+import AddBoxIcon from '@material-ui/icons/AddBox';
 import { IconButton, TextField } from '@material-ui/core';
 import { Droppable, Draggable } from "react-beautiful-dnd";
 import Event from "./Event";
@@ -20,7 +21,10 @@ const Container = styled('div')({
 });
 
 const Title =  styled('h3')({
-  padding: '8px',
+  display: 'flex',
+  alignItems: 'center',
+  width: '100%',
+  padding: '0.5em 1em',
 });
 
 const TaskList = styled('div')({
@@ -37,13 +41,25 @@ const TaskList = styled('div')({
   }
 });
 
+const AddButton = styled(IconButton)({
+  marginLeft: 'auto',
+  cursor: 'pointer',
+})
+
 const InnerList = React.memo((props) => {
-  return props.events.map((event, index) => (
-        <Event key={event._id} event={event} index={index} />
+  const { updateEvent, itineraryId, events } = props;
+  return events.map((event, index) => (
+        <Event
+          key={event._id}
+          event={event}
+          index={index}
+          updateEvent={updateEvent}
+          itineraryId={itineraryId}
+        />
       ));
 });
 
-function Itinerary({ itinerary, index, handleClickTitle }) {
+function Itinerary({ itinerary, index, handleClickTitle, addEventClick }) {
   const [title, setTitle] = useState(itinerary.title);
   const [editField, setEditField] = useState(false);
   const handleClick = (updateTitle = false) => {
@@ -100,6 +116,14 @@ function Itinerary({ itinerary, index, handleClickTitle }) {
                 >
                   <EditIcon style={{fontSize: 16, marginLeft: '.1em'}} />
                 </IconButton>
+                <AddButton
+                  component="span"
+                  size="small"
+                  disableRipple={true}
+                  onClick={() => addEventClick(itinerary._id)}
+                >
+                  <AddBoxIcon style={{fontSize: 30, marginLeft: '.1em'}} />
+                </AddButton>
               </Title>
               )
           }
@@ -115,7 +139,11 @@ function Itinerary({ itinerary, index, handleClickTitle }) {
                 {...provided.droppableProps}
                 isDraggingOver={snapshot.isDraggingOver}
               >
-                <InnerList events={itinerary.events} />
+                <InnerList
+                  events={itinerary.events}
+                  updateEvent={addEventClick}
+                  itineraryId={itinerary._id}
+                />
                 {provided.placeholder}
               </TaskList>
             )}

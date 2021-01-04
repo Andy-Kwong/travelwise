@@ -3,7 +3,7 @@ import { styled } from '@material-ui/core/styles';
 import { DragDropContext, Droppable } from "react-beautiful-dnd";
 import Itinerary from "./Itinerary";
 import TripContext from "../../context/TripContext";
-import { updateTrip } from "../../context/api";
+import { updateTrip, addEvent } from "../../context/api";
 
 const Container = styled('div')({
   display: 'flex',
@@ -14,12 +14,13 @@ const Container = styled('div')({
 })
 
 const InnerList = React.memo((props) => {
-  const { itinerary, index, key, handleClickTitle } = props;
+  const { itinerary, index, key, handleClickTitle, addEventClick } = props;
   return <Itinerary
     key={key}
     itinerary={itinerary}
     index={index}
     handleClickTitle={handleClickTitle}
+    addEventClick={addEventClick}
   />;
 });
 
@@ -150,8 +151,49 @@ function Trip() {
         [itineraryId]: updatedItinerary,
       }
     }
-    console.log('newState:', newState);
-    console.log('updatedItinerary:', updatedItinerary);
+    setTripData(newState);
+    updateTrip(newState._id, newState);
+  };
+
+  const addEventClick = async (itineraryId, event) => {
+    const newEvent = event || await addEvent({
+      title: 'Insert Title',
+      content: 'Edit Description',
+      link: '',
+      location: 'Add Location',
+      address: 'Address',
+      duration: 0,
+      notes: 'N/A',
+    });
+
+    console.log('Updated Event:', event);
+
+    const updatedEvents = [
+      ...tripData.itineraries[itineraryId].events,
+    ];
+
+    if (!event) {
+      updatedEvents.push(newEvent.data);
+    } else {
+      for (let i = 0; i < updatedEvents.length; i++) {
+        if (updatedEvents[i]._id === event._id) {
+          updatedEvents[i] = { ...event };
+          break;
+        }
+      }
+    }
+
+    const newState = {
+      ...tripData,
+      itineraries: {
+        ...tripData.itineraries,
+        [itineraryId]: {
+          ...tripData.itineraries[itineraryId],
+          events: updatedEvents,
+        }
+      }
+    }
+    console.log('New State:', newState);
     setTripData(newState);
     updateTrip(newState._id, newState);
   };
@@ -189,6 +231,7 @@ function Trip() {
                     // isDropDisabled={isDropDisabled}
                     index={index}
                     handleClickTitle={handleClickTitle}
+                    addEventClick={addEventClick}
                   />
                 )
               })}

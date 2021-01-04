@@ -31,3 +31,12 @@ export const getTripsByUser = async (user) => {
     console.log(err);
   }
 }
+
+export const addEvent = async (data) => {
+  try {
+    const res = await axios.post('/api/event', data);
+    return res;
+  } catch (err) {
+    console.log(err);
+  }
+}
