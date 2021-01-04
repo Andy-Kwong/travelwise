@@ -3,7 +3,18 @@ import { styled } from '@material-ui/core/styles';
 import OpenInNewIcon from '@material-ui/icons/OpenInNew';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
-import { IconButton, TextField, Menu, MenuItem, Button } from '@material-ui/core';
+import EditIcon from '@material-ui/icons/Edit';
+import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
+
+import {
+  IconButton,
+  TextField,
+  Menu,
+  MenuItem,
+  Button,
+  ListItemIcon,
+  ListItemText,
+} from '@material-ui/core';
 
 const Container = styled('div')({
   display: 'flex',
@@ -32,14 +43,14 @@ const TitleText = styled('a')({
 })
 
 const Description = styled('span')({
-  height: props => !props.editing && '3.6em',
+  height: props => !props.isEditing && '3.6em',
   width: '100%',
   overflow: 'hidden',
   lineHeight: '1.2em',
   position: 'relative',
   marginBottom: '0.5em',
   '&:after': {
-    content: props => !props.editing && '""',
+    content: props => !props.isEditing && '""',
     textAlign: 'right',
     position: 'absolute',
     bottom: 0,
@@ -108,15 +119,26 @@ function Info(props) {
     7, 8, 9, 10, 11, 12
   ];
 
-  const handleClickMenu = (e) => {
+  const openMenu = (e) => {
     setAnchorEl(e.currentTarget);
   };
 
-  const handleCloseMenu = (e) => {
+  const closeDurationMenu = (e) => {
     console.log('Menu Item:', e.target.value);
     e.target.value === 0 ? setDuration(0.5) : e.target.value && setDuration(Number(e.target.value));
     setAnchorEl(null);
   };
+
+  const closeOptionsMenu = (e) => {
+    if (e.target.id === 'edit') {
+      setEditFields(true);
+    } else if (e.target.id === 'delete') {
+      const toDelete = true;
+      props.handleEdit(_id, toDelete);
+    }
+
+    setAnchorEl(null);
+  }
 
   const handleSubmit = () => {
     const editedEvent = {
@@ -157,7 +179,7 @@ function Info(props) {
                 fullWidth
               />
             </Title>
-            <Description isDragging={props.isDragging} editing>
+            <Description isDragging={props.isDragging} isEditing={true}>
               <TextField
                 defaultValue={contentField}
                 onChange={(e) => setContent(e.target.value)}
@@ -177,15 +199,15 @@ function Info(props) {
             </Location>
             <Time>
               Duration:
-              <DropdownMenu onClick={handleClickMenu}>
+              <DropdownMenu onClick={openMenu}>
                 {durationField} hours
-                <ArrowDropDownIcon style={{fotSize: 12}} />
+                <ArrowDropDownIcon style={{fontSize: 16}} />
               </DropdownMenu>
               <Menu
                 anchorEl={anchorEl}
                 keepMounted
                 open={open}
-                onClose={handleCloseMenu}
+                onClose={closeDurationMenu}
                 PaperProps={{
                   style: {
                     maxHeight: 48 * 4.5,
@@ -198,7 +220,7 @@ function Info(props) {
                     key={option}
                     selected={option === durationField}
                     value={option}
-                    onClick={handleCloseMenu}
+                    onClick={closeDurationMenu}
                   >
                     {option} hours
                   </MenuItem>
@@ -227,10 +249,36 @@ function Info(props) {
                     component="span"
                     size="small"
                     disableRipple={true}
-                    onClick={() => setEditFields(true)}
+                    onClick={openMenu}
                   >
                     <MoreVertIcon style={{fontSize: 16, marginLeft: '.1em'}}/>
                   </EditButton>
+                  <Menu
+                    anchorEl={anchorEl}
+                    keepMounted
+                    open={open}
+                    onClose={closeOptionsMenu}
+                    getContentAnchorEl={null}
+                    anchorOrigin={{
+                      vertical: 'bottom',
+                      horizontal: 'right',
+                    }}
+                    transformOrigin={{
+                      vertical: 'top',
+                      horizontal: 'right',
+                    }}
+                  >
+                    <MenuItem id="edit" onClick={closeOptionsMenu}>
+                      <EditIcon fontSize="small" style={{marginRight: 'auto'}} />
+                      Edit
+                    </MenuItem>
+                    <MenuItem id="delete" onClick={closeOptionsMenu}>
+                      <DeleteForeverIcon
+                        fontSize="small"
+                        style={{marginRight: '1em'}} />
+                      Delete
+                    </MenuItem>
+                  </Menu>
                 </Title>
                 :
                 <Title>
@@ -239,10 +287,36 @@ function Info(props) {
                     component="span"
                     size="small"
                     disableRipple={true}
-                    onClick={() => setEditFields(true)}
+                    onClick={openMenu}
                   >
                     <MoreVertIcon style={{fontSize: 16, marginLeft: '.1em'}}/>
                   </EditButton>
+                  <Menu
+                    anchorEl={anchorEl}
+                    keepMounted
+                    open={open}
+                    onClose={closeOptionsMenu}
+                    getContentAnchorEl={null}
+                    anchorOrigin={{
+                      vertical: 'bottom',
+                      horizontal: 'right',
+                    }}
+                    transformOrigin={{
+                      vertical: 'top',
+                      horizontal: 'right',
+                    }}
+                  >
+                    <MenuItem id="edit" onClick={closeOptionsMenu}>
+                      <EditIcon fontSize="small" style={{marginRight: 'auto'}} />
+                      Edit
+                    </MenuItem>
+                    <MenuItem id="delete" onClick={closeOptionsMenu}>
+                      <DeleteForeverIcon
+                        fontSize="small"
+                        style={{marginRight: '1em'}} />
+                      Delete
+                    </MenuItem>
+                  </Menu>
                 </Title>
             }
             <Description isDragging={props.isDragging}>{contentField}</Description>

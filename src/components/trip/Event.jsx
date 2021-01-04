@@ -22,8 +22,8 @@ const Item = styled('div')({
 function Event({ event, index, updateEvent, itineraryId }) {
   const isDragDisabled = false; // props.task.id === 'task-1';
 
-  const handleEdit = (data) => {
-    updateEvent(itineraryId, data);
+  const handleEdit = (data, toDelete = false) => {
+    updateEvent(itineraryId, data, toDelete);
   };
 
   return (

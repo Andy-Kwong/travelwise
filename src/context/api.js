@@ -40,3 +40,21 @@ export const addEvent = async (data) => {
     console.log(err);
   }
 }
+
+export const deleteEvent = async (itineraryId, eventId) => {
+  try {
+    const res = await axios.delete(`/url/event/${eventId}`, {itineraryId, eventId});
+    console.log(res);
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+export const addItinerary = async (data) => {
+  try {
+    const res = await axios.post('/api/itinerary', data);
+    return res;
+  } catch (err) {
+    console.log(err);
+  }
+}

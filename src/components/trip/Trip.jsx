@@ -3,7 +3,7 @@ import { styled } from '@material-ui/core/styles';
 import { DragDropContext, Droppable } from "react-beautiful-dnd";
 import Itinerary from "./Itinerary";
 import TripContext from "../../context/TripContext";
-import { updateTrip, addEvent } from "../../context/api";
+import { updateTrip, addEvent, addItinerary } from "../../context/api";
 
 const Container = styled('div')({
   display: 'flex',
@@ -155,7 +155,7 @@ function Trip() {
     updateTrip(newState._id, newState);
   };
 
-  const addEventClick = async (itineraryId, event) => {
+  const addEventClick = async (itineraryId, event, toDelete) => {
     const newEvent = event || await addEvent({
       title: 'Insert Title',
       content: 'Edit Description',
@@ -173,7 +173,13 @@ function Trip() {
     ];
 
     if (!event) {
-      updatedEvents.push(newEvent.data);
+      updatedEvents.unshift(newEvent.data);
+    } else if (toDelete) {
+      for (let i = 0; i < updatedEvents.length; i++) {
+        if (updatedEvents[i]._id === event) {
+          updatedEvents.splice(i, 1);
+        }
+      }
     } else {
       for (let i = 0; i < updatedEvents.length; i++) {
         if (updatedEvents[i]._id === event._id) {
@@ -198,7 +204,9 @@ function Trip() {
     updateTrip(newState._id, newState);
   };
 
-  const addItinerary = () => {};
+  const addItinerary = () => {
+
+  };
 
   return (
     tripData !== null
