@@ -17,7 +17,7 @@ const Container = styled('div')({
 function ProfileTab(props) {
   return (
     <Container>
-      <h1>Good Afternoon, Mr. Poopy B.</h1>
+      <h1>Good Morning, Gregory</h1>
     </Container>
   );
 }

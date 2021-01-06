@@ -85,7 +85,7 @@ function Sidebar(props) {
     <Container>
       <UserInfo>
         <UserPhoto url='https://randomuser.me/api/portraits/men/43.jpg' />
-        <UserName>Mr. Poopy B.</UserName>
+        <UserName>Gregory Richens</UserName>
       </UserInfo>
       <MenuSection>
         <MenuItem

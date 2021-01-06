@@ -19,6 +19,8 @@ const Card = styled(Paper)({
   borderRadius: '.5em',
   boxSizing: 'border-box',
   cursor: 'pointer',
+  marginBottom: '0.5em',
+  marginTop: '1em',
 })
 
 function TripCard(props) {
@@ -26,7 +28,7 @@ function TripCard(props) {
     <Card onClick={() => props.handleClick(props.id)}>
       <Grid container spacing={2}>
         <Grid item>
-          <TripPhoto src="https://images.unsplash.com/photo-1609433635932-6571b56f4fd4?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80"/>
+          <TripPhoto src={props.photoUrl} />
         </Grid>
         <Grid item xs={12} sm container>
           <Grid item xs container direction="column" spacing={2}>
@@ -38,7 +40,7 @@ function TripCard(props) {
                 {props.notes}
               </Typography>
               <Typography variant="body1" color='textSecondary'>
-                12/23/2021 - 12/30/2021
+                {props.dates}
               </Typography>
             </Grid>
           </Grid>
