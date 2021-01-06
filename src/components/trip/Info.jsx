@@ -12,8 +12,6 @@ import {
   Menu,
   MenuItem,
   Button,
-  ListItemIcon,
-  ListItemText,
 } from '@material-ui/core';
 
 const Container = styled('div')({
@@ -43,7 +41,7 @@ const TitleText = styled('a')({
 })
 
 const Description = styled('span')({
-  height: props => !props.isEditing && '3.6em',
+  height: props => !props.isEditing && '3.5em',
   width: '100%',
   overflow: 'hidden',
   lineHeight: '1.2em',
@@ -57,11 +55,7 @@ const Description = styled('span')({
     right: 0,
     width: '25%',
     height: '1.2em',
-    background: props => (
-      props.isDragging
-        ? 'linear-gradient(to right, rgba(144, 238, 144, 0), rgba(144, 238, 144, 1) 50%)'
-        : 'linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1) 50%)'
-    ),
+    background: 'linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1) 50%)',
   }
 })
 
@@ -270,13 +264,11 @@ function Info(props) {
                   >
                     <MenuItem id="edit" onClick={closeOptionsMenu}>
                       <EditIcon fontSize="small" style={{marginRight: 'auto'}} />
-                      Edit
+                      Edit Event
                     </MenuItem>
                     <MenuItem id="delete" onClick={closeOptionsMenu}>
-                      <DeleteForeverIcon
-                        fontSize="small"
-                        style={{marginRight: '1em'}} />
-                      Delete
+                      <DeleteForeverIcon fontSize="small" style={{marginRight: '1em'}} />
+                      Delete Event
                     </MenuItem>
                   </Menu>
                 </Title>
@@ -308,13 +300,11 @@ function Info(props) {
                   >
                     <MenuItem id="edit" onClick={closeOptionsMenu}>
                       <EditIcon fontSize="small" style={{marginRight: 'auto'}} />
-                      Edit
+                      Edit Event
                     </MenuItem>
                     <MenuItem id="delete" onClick={closeOptionsMenu}>
-                      <DeleteForeverIcon
-                        fontSize="small"
-                        style={{marginRight: '1em'}} />
-                      Delete
+                      <DeleteForeverIcon fontSize="small" style={{marginRight: '1em'}} />
+                      Delete Event
                     </MenuItem>
                   </Menu>
                 </Title>

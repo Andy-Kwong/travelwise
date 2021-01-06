@@ -1,26 +1,73 @@
 import React, { useState, useContext } from 'react';
 import { styled } from '@material-ui/core/styles';
+import { Paper } from '@material-ui/core';
+import AddIcon from '@material-ui/icons/Add';
 import { DragDropContext, Droppable } from "react-beautiful-dnd";
 import Itinerary from "./Itinerary";
 import TripContext from "../../context/TripContext";
 import { updateTrip, addEvent, addItinerary } from "../../context/api";
+import MenuBar from "./MenuBar";
 
 const Container = styled('div')({
   display: 'flex',
+  alignItems: 'center',
   height: '100vh',
   width: '100vw',
   overflow: 'scroll',
   boxSizing: 'border-box',
 })
 
+const NewItineraryButton = styled(Paper)({
+  display: 'flex',
+  flexDirection: 'column',
+  justifyContent: 'center',
+  alignItems: 'center',
+  height: '70vh',
+  minWidth: '100px',
+  overflow: 'hidden',
+  boxSizing: 'border-box',
+  cursor: 'pointer',
+  '&:hover': {
+    boxShadow: '0px 3px 5px -1px rgba(0,0,0,0.2), 0px 5px 8px 0px rgba(0,0,0,0.14), 0px 1px 14px 0px rgba(0,0,0,0.12)'
+  },
+  marginLeft: 'auto'
+});
+
+const NewItineraryTitle = styled('h4')({
+  display: 'flex',
+  alignItems: 'center',
+  width: '100%',
+  padding: '0 1em 1em',
+  borderBottom: '1px solid lightgrey',
+  marginBottom: 'auto',
+  overflow: 'hidden',
+  whiteSpace: 'nowrap',
+  position: 'relative',
+  '&:after': {
+    content: '""',
+    textAlign: 'right',
+    position: 'absolute',
+    bottom: 0,
+    right: 0,
+    width: '50%',
+    height: '100%',
+    background: 'linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1) 80%)',
+  }
+});
+
+const NewItineraryText = styled('span')({
+  marginBottom: 'auto',
+})
+
 const InnerList = React.memo((props) => {
-  const { itinerary, index, key, handleClickTitle, addEventClick } = props;
+  const { itinerary, index, key, handleClickTitle, addEventClick, deleteItineraryClick } = props;
   return <Itinerary
     key={key}
     itinerary={itinerary}
     index={index}
     handleClickTitle={handleClickTitle}
     addEventClick={addEventClick}
+    deleteItineraryClick={deleteItineraryClick}
   />;
 });
 
@@ -204,9 +251,47 @@ function Trip() {
     updateTrip(newState._id, newState);
   };
 
-  const addItinerary = () => {
+  const addItineraryClick = async () => {
+    let newItinerary = {
+      title: 'New Itinerary',
+      description: '',
+      events: [],
+      notes: '',
+    }
+    newItinerary = await addItinerary(newItinerary);
+    newItinerary = newItinerary.data;
 
+    const newState = {
+      ...tripData,
+      itineraries: {
+        ...tripData.itineraries,
+        [newItinerary._id]: {
+          ...newItinerary
+        }
+      },
+      order: [
+        ...tripData.order,
+        newItinerary._id,
+      ],
+    }
+
+    console.log('New State:', newState);
+    setTripData(newState);
+    updateTrip(newState._id, newState);
   };
+
+  const deleteItineraryClick = async (itineraryId) => {
+    const newState = {
+      ...tripData,
+    }
+
+    newState.order.splice(newState.order.indexOf(itineraryId), 1);
+    delete newState.itineraries[itineraryId];
+
+    console.log(newState);
+    setTripData(newState);
+    updateTrip(newState._id, newState);
+  }
 
   return (
     tripData !== null
@@ -216,7 +301,8 @@ function Trip() {
         onDragStart={onDragStart}
         onDragEnd={onDragEnd}
       >
-        <Droppable
+      <MenuBar title={tripData.title} dates={tripData.dates} />
+      <Droppable
           droppableId="all-columns"
           direction="horizontal"
           type="column"
@@ -240,11 +326,22 @@ function Trip() {
                     index={index}
                     handleClickTitle={handleClickTitle}
                     addEventClick={addEventClick}
+                    deleteItineraryClick={deleteItineraryClick}
                   />
                 )
               })}
               {provided.placeholder}
-              <button onClick={addItinerary}>Add Itinerary</button>
+              <NewItineraryButton
+                onClick={addItineraryClick}
+              >
+                <NewItineraryTitle>
+                  New Itinerary
+                </NewItineraryTitle>
+                <AddIcon />
+                <NewItineraryText>
+                  Add Itinerary
+                </NewItineraryText>
+              </NewItineraryButton>
             </Container>
           )}
         </Droppable>

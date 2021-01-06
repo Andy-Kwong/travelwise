@@ -1,13 +1,12 @@
 import React from 'react';
 import { styled } from '@material-ui/core/styles';
+import { Paper } from '@material-ui/core'
 import { Draggable } from "react-beautiful-dnd";
 import Info from "./Info";
-import {IconButton} from "@material-ui/core";
 
-const Item = styled('div')({
+const Item = styled(Paper)({
   width: '100%',
   boxSizing: 'border-box',
-  border: '1px solid lightgrey',
   borderRadius: '2px',
   padding: '8px',
   marginBottom: '8px',
@@ -37,7 +36,8 @@ function Event({ event, index, updateEvent, itineraryId }) {
           {...provided.draggableProps}
           {...provided.dragHandleProps}
           ref={provided.innerRef}
-          bg={snapshot.isDragging ? 'lightgreen' : 'white'}
+          bg={snapshot.isDragging && 'white'}
+          elevation={snapshot.isDragging ? 5 : 1}
           // isDragDisabled={isDragDisabled}
         >
           <Info

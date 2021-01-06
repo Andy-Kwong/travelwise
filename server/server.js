@@ -18,6 +18,7 @@ function createServer() {
   app.put('/api/trip/:tripId', trip.updateTrip);
   app.get('/api/user/:user/trips', trip.findAllByUser);
   app.post('/api/event', create.createEvent);
+  app.post('/api/itinerary', create.createItinerary);
   app.get('*', (req, res) => {
     debug(`getting id: ${req.params}`);
     res.sendFile(path.join(__dirname, '..', 'build', 'index.html'));

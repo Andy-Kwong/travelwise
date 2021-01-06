@@ -5,12 +5,21 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="969e6f4d-a71e-4ae0-81b4-80819cddae6d" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/components/trip/MenuBar.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.eslintcache" beforeDir="false" afterPath="$PROJECT_DIR$/.eslintcache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db/create.js" beforeDir="false" afterPath="$PROJECT_DIR$/db/create.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/server.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/server.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/trip/Event.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/trip/Event.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/trip/Info.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/trip/Info.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/trip/Itinerary.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/trip/Itinerary.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/trip/Trip.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/trip/Trip.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/context/api.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/context/api.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/user/ProfileTab.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/user/ProfileTab.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/user/Sidebar.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/user/Sidebar.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/user/TripCard.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/user/TripCard.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/user/TripTab.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/user/TripTab.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/context/TripContext.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/context/TripContext.jsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -123,7 +132,7 @@
       <workItem from="1608580354981" duration="29284000" />
       <workItem from="1609101863397" duration="71921000" />
       <workItem from="1609635623458" duration="6927000" />
-      <workItem from="1609707424732" duration="27469000" />
+      <workItem from="1609707424732" duration="44454000" />
     </task>
     <task id="LOCAL-00001" summary="Create landing, login, and registration pages">
       <created>1609205885073</created>

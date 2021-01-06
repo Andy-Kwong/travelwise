@@ -11,9 +11,31 @@ const createEvent = async (req, res) => {
     res.send(insertResult).status(200);
   } catch (err) {
     debug(err);
+    res.end().status(500);
+  }
+}
+
+const createItinerary = async (req, res) => {
+  try {
+    const insertResult = await itinerary.insert(req.body);
+    res.send(insertResult).status(200);
+  } catch (err) {
+    debug(err);
+    res.end().status(500);
+  }
+}
+
+const createTrip = async (req, res) => {
+  try {
+    const insertResult = await trip.createTrip(req.body);
+    res.send(insertResult).status(200);
+  } catch (err) {
+    debug(err);
+    res.end().status(500);
   }
 }
 
 module.exports = {
   createEvent,
+  createItinerary,
 }

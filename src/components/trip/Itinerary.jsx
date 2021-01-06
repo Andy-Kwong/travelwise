@@ -2,15 +2,16 @@ import React, { useState } from 'react';
 import { styled } from '@material-ui/core/styles';
 import EditIcon from '@material-ui/icons/Edit';
 import DoneIcon from '@material-ui/icons/Done';
-import AddBoxIcon from '@material-ui/icons/AddBox';
-import { IconButton, TextField } from '@material-ui/core';
+import AddIcon from '@material-ui/icons/Add';
+import MoreVertIcon from '@material-ui/icons/MoreVert';
+import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
+import { IconButton, TextField, Menu, MenuItem, Paper } from '@material-ui/core';
 import { Droppable, Draggable } from "react-beautiful-dnd";
 import Event from "./Event";
 
-const Container = styled('div')({
+const Container = styled(Paper)({
   margin: '8px',
-  border: '1px solid lightgrey',
-  borderRadius: '2px',
+  borderRadius: '0.5em',
   backgroundColor: 'white',
   width: '360px',
   minWidth: '360px',
@@ -20,17 +21,19 @@ const Container = styled('div')({
   boxSizing: 'border-box',
 });
 
-const Title =  styled('h3')({
+const Title = styled('h3')({
   display: 'flex',
   alignItems: 'center',
   width: '100%',
-  padding: '0.5em 1em',
+  padding: '0.5em 1em 1em',
+  borderBottom: '1px solid lightgrey',
+  marginBottom: '0.5em',
 });
 
 const TaskList = styled('div')({
   padding: '8px',
   transition: 'background-color .2s ease',
-  backgroundColor: props => (props.isDraggingOver ? 'skyblue' : 'inherit'),
+  backgroundColor: 'inherit',
   flexGrow: '1',
   minHeight: '100px',
   height: '100%',
@@ -59,9 +62,27 @@ const InnerList = React.memo((props) => {
       ));
 });
 
-function Itinerary({ itinerary, index, handleClickTitle, addEventClick }) {
+function Itinerary({ itinerary, index, handleClickTitle, addEventClick, deleteItineraryClick }) {
   const [title, setTitle] = useState(itinerary.title);
   const [editField, setEditField] = useState(false);
+  const [anchorEl, setAnchorEl] = useState(null);
+  const open = Boolean(anchorEl);
+
+  const openMenu = (e) => {
+    setAnchorEl(e.currentTarget);
+  }
+
+  const closeMenu = (e) => {
+    console.log('Menu Item:', e.target.id);
+
+    if (e.target.id === 'add') {
+      addEventClick(itinerary._id);
+    } else if (e.target.id === 'delete') {
+      deleteItineraryClick(itinerary._id);
+    }
+    setAnchorEl(null);
+  }
+
   const handleClick = (updateTitle = false) => {
     setEditField(!editField);
     updateTitle && handleClickTitle(itinerary._id, title);
@@ -81,10 +102,11 @@ function Itinerary({ itinerary, index, handleClickTitle, addEventClick }) {
       draggableId={itinerary._id}
       index={index}
     >
-      {(provided) => (
+      {(provided, snapshot) => (
         <Container
           {...provided.draggableProps}
           ref={provided.innerRef}
+          elevation={snapshot.isDragging ? 7 : 3}
         >
           {
             editField
@@ -94,6 +116,7 @@ function Itinerary({ itinerary, index, handleClickTitle, addEventClick }) {
                   defaultValue={itinerary.title}
                   onChange={handleChange}
                   onKeyDown={handleKeyDown}
+                  fullWidth
                 />
                 <IconButton
                   component="span"
@@ -120,10 +143,34 @@ function Itinerary({ itinerary, index, handleClickTitle, addEventClick }) {
                   component="span"
                   size="small"
                   disableRipple={true}
-                  onClick={() => addEventClick(itinerary._id)}
+                  onClick={openMenu}
                 >
-                  <AddBoxIcon style={{fontSize: 30, marginLeft: '.1em'}} />
+                  <MoreVertIcon style={{fontSize: 24, marginLeft: '.1em'}} />
                 </AddButton>
+                <Menu
+                  anchorEl={anchorEl}
+                  keepMounted
+                  open={open}
+                  onClose={closeMenu}
+                  getContentAnchorEl={null}
+                  anchorOrigin={{
+                    vertical: 'bottom',
+                    horizontal: 'right',
+                  }}
+                  transformOrigin={{
+                    vertical: 'top',
+                    horizontal: 'right',
+                  }}
+                >
+                  <MenuItem id="add" onClick={closeMenu}>
+                    <AddIcon fontSize="small" style={{marginRight: 'auto'}} />
+                    Add Event
+                  </MenuItem>
+                  <MenuItem id="delete" onClick={closeMenu}>
+                    <DeleteForeverIcon fontSize="small" style={{marginRight: '1em'}} />
+                    Delete Itinerary
+                  </MenuItem>
+                </Menu>
               </Title>
               )
           }

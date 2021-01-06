@@ -7,7 +7,7 @@ const TripContext = createContext();
 export const TripContextProvider = ({ children }) => {
   const [tripData, setTripData] = useState(null);
   const [userTrips, setUserTrips] = useState(null);
-  const [menuSelection, setMenuSelection] = useState('Profile')
+  const [menuSelection, setMenuSelection] = useState('Profile');
 
   useEffect(() => {
     const getTrip = async () => {
