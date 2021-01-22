@@ -4,14 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="969e6f4d-a71e-4ae0-81b4-80819cddae6d" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/db/user.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.eslintcache" beforeDir="false" afterPath="$PROJECT_DIR$/.eslintcache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db/itinerary.js" beforeDir="false" afterPath="$PROJECT_DIR$/db/itinerary.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/trip/Info.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/trip/Info.jsx" afterDir="false" />
-    </list>
+    <list default="true" id="969e6f4d-a71e-4ae0-81b4-80819cddae6d" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -125,7 +118,7 @@
       <workItem from="1609635623458" duration="6927000" />
       <workItem from="1609707424732" duration="47433000" />
       <workItem from="1610236514237" duration="53000" />
-      <workItem from="1611269359568" duration="2843000" />
+      <workItem from="1611269359568" duration="3093000" />
     </task>
     <task id="LOCAL-00001" summary="Create landing, login, and registration pages">
       <created>1609205885073</created>
