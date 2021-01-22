@@ -7,7 +7,7 @@ const itinerarySchema = mongoose.Schema({
   description: String,
   events: [event.eventSchema],
   notes: String
-})
+});
 
 const Itinerary = mongoose.model('Itinerary', itinerarySchema);
 
