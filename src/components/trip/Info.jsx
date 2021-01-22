@@ -63,10 +63,6 @@ const Location = styled('span')({
   marginBottom: '0.5em',
 })
 
-const Time = styled('span')({
-
-})
-
 const EditButton = styled(IconButton)({
   marginLeft: 'auto',
   cursor: 'pointer',
@@ -152,9 +148,10 @@ function Info(props) {
 
   return (
     <Container>
-      {
+       {
         editFields
-          ? <>
+          ?
+          <>
             <Title>
               <TitleText>
                 <TextField
@@ -191,7 +188,7 @@ function Info(props) {
                 fullWidth
               />
             </Location>
-            <Time>
+            <span>
               Duration:
               <DropdownMenu onClick={openMenu}>
                 {durationField} hours
@@ -220,7 +217,7 @@ function Info(props) {
                   </MenuItem>
                 )}
               </Menu>
-            </Time>
+            </span>
             <Button
               color="primary"
               variant="outlined"
@@ -230,96 +227,63 @@ function Info(props) {
               Done Editing
             </Button>
           </>
-          : <>
-            {
-              link
+          :
+          <>
+            <Title>
+              {
+                link
                 ?
-                <Title>
-                  <TitleText href={linkField} target="_blank">
-                    {titleField}
-                    <OpenInNewIcon style={{fontSize: 12, marginLeft: '0.25em'}}/>
-                  </TitleText>
-                  <EditButton
-                    component="span"
-                    size="small"
-                    disableRipple={true}
-                    onClick={openMenu}
-                  >
-                    <MoreVertIcon style={{fontSize: 16, marginLeft: '.1em'}}/>
-                  </EditButton>
-                  <Menu
-                    anchorEl={anchorEl}
-                    keepMounted
-                    open={open}
-                    onClose={closeOptionsMenu}
-                    getContentAnchorEl={null}
-                    anchorOrigin={{
-                      vertical: 'bottom',
-                      horizontal: 'right',
-                    }}
-                    transformOrigin={{
-                      vertical: 'top',
-                      horizontal: 'right',
-                    }}
-                  >
-                    <MenuItem id="edit" onClick={closeOptionsMenu}>
-                      <EditIcon fontSize="small" style={{marginRight: 'auto'}} />
-                      Edit Event
-                    </MenuItem>
-                    <MenuItem id="delete" onClick={closeOptionsMenu}>
-                      <DeleteForeverIcon fontSize="small" style={{marginRight: '1em'}} />
-                      Delete Event
-                    </MenuItem>
-                  </Menu>
-                </Title>
+                <TitleText href={linkField} target="_blank">
+                  {titleField}
+                  <OpenInNewIcon style={{fontSize: 12, marginLeft: '0.25em'}}/>
+                </TitleText>
                 :
-                <Title>
-                  <TitleText>{titleField}</TitleText>
-                  <EditButton
-                    component="span"
-                    size="small"
-                    disableRipple={true}
-                    onClick={openMenu}
-                  >
-                    <MoreVertIcon style={{fontSize: 16, marginLeft: '.1em'}}/>
-                  </EditButton>
-                  <Menu
-                    anchorEl={anchorEl}
-                    keepMounted
-                    open={open}
-                    onClose={closeOptionsMenu}
-                    getContentAnchorEl={null}
-                    anchorOrigin={{
-                      vertical: 'bottom',
-                      horizontal: 'right',
-                    }}
-                    transformOrigin={{
-                      vertical: 'top',
-                      horizontal: 'right',
-                    }}
-                  >
-                    <MenuItem id="edit" onClick={closeOptionsMenu}>
-                      <EditIcon fontSize="small" style={{marginRight: 'auto'}} />
-                      Edit Event
-                    </MenuItem>
-                    <MenuItem id="delete" onClick={closeOptionsMenu}>
-                      <DeleteForeverIcon fontSize="small" style={{marginRight: '1em'}} />
-                      Delete Event
-                    </MenuItem>
-                  </Menu>
-                </Title>
-            }
+                <TitleText>{titleField}</TitleText>
+              }
+              <EditButton
+                component="span"
+                size="small"
+                disableRipple={true}
+                onClick={openMenu}
+              >
+                <MoreVertIcon style={{fontSize: 16, marginLeft: '.1em'}}/>
+              </EditButton>
+              <Menu
+                anchorEl={anchorEl}
+                keepMounted
+                open={open}
+                onClose={closeOptionsMenu}
+                getContentAnchorEl={null}
+                anchorOrigin={{
+                  vertical: 'bottom',
+                  horizontal: 'right',
+                }}
+                transformOrigin={{
+                  vertical: 'top',
+                  horizontal: 'right',
+                }}
+              >
+                <MenuItem id="edit" onClick={closeOptionsMenu}>
+                  <EditIcon fontSize="small" style={{marginRight: 'auto'}} />
+                  Edit Event
+                </MenuItem>
+                <MenuItem id="delete" onClick={closeOptionsMenu}>
+                  <DeleteForeverIcon fontSize="small" style={{marginRight: '1em'}} />
+                  Delete Event
+                </MenuItem>
+              </Menu>
+            </Title>
             <Description isDragging={props.isDragging}>{contentField}</Description>
             <Location>Location: {locationField}</Location>
             {
               duration < 1
-                ? <Time>Duration: {60 * durationField} minutes</Time>
-                : <Time>Duration: {durationField} {durationField === 1 ? 'hour' : 'hours'}</Time>
+                ? <span>Duration: {60 * durationField} minutes</span>
+                : <span>Duration: {durationField} {durationField === 1 ? 'hour' : 'hours'}</span>
             }
           </>
-      }
+       }
     </Container>
   );
-};
+}
 
 export default Info;
